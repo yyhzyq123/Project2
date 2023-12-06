@@ -28,3 +28,9 @@ For this project, I was interested in using Fantasy Basketball data to better un
   2. How the Price/Night Change Over the Year in Seattle? 
   3. How to use machine learning models to predict housing prices in Seattle ?
 
+#### 4.Project Results
+
+The final outcome of this project has two parts
+
+* jupyter notebook  On Write  a Data Science Blog Post.ipynb
+* jupyter notebook On bolg.md

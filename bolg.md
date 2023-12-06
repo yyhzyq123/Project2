@@ -1,93 +1,64 @@
-# Machine Learning Model-Based House Price Prediction - Data Processing
+# Machine Learning Model-Based House Price Prediction 
 
 <img src="./image/1.png">
 
-## 1.Data Sources：
+## Data Sources：
 
 The Seattle housing price dataset is sourced from：[Seattle Airbnb Open Data (kaggle.com)](https://www.kaggle.com/datasets/airbnb/seattle/data)
 
-## 2.Data Processing
+## Question raising
 
-### Introduction to Data Processing
+* How To Be a Super Host?
+* How the Price/Night Change Over the Year in Seattle?
+* Can we Predict Property Price/Night in Seattle Using Machine Learning Model ?
 
-* The upper limit of the model is determined by data, and data processing takes up almost half of the effort in a complete case
-* It is divided into two parts: data analysis and data cleaning
-* Data analysis mainly includes: viewing data content, attributes, number of non null values, self analysis of attributes, correlation between attributes, and the level of correlation between attributes and predicted target values. Next, I will give a few examples to demonstrate
+## Q1. How To Be a Super Host ?
 
-### Data Viewing
+* Next, we will start from the host_ Is_ Analyze the problem based on the relationship between super and three characteristics
 
-```python
-# Show Seattle dataset columns details
-df.info()
-```
+* By drawing a host_ Is_ Superhost and Room_ Type bar chart analysis
 
-<img src="./image/2.png">
+<img src='./image/2.png'>
 
-```python
-df.describe()
-```
+* Draw host_ Is_ Superhost and host_ Response_ Conditional graph analysis of time
 
-<img src="./image/3.png">
+<img src='./image/3.png'>
 
-### Handling Missing Values
+* Draw host_ Is_ Superhost and number_ Of_ Review the box diagram for analysis
 
-#### 1.View Missing Values
+<img src='./image/4.png'>
 
-* Use the isnull function to view missing values
+* From the first picture, it can be seen that the type of room has little to do with whether it is a super landlord, and there should be as few open rooms as possible.
+* From the second graph, it can be seen that landlords with shorter response times are more likely to become super landlords
+* From the third chart, it can be seen that the more comments there are, the more positive reviews there are, and the probability of becoming a super landlord will significantly increase
 
-```python
-# Check which features have missing values
-df.isnull().sum().sort_values(ascending=False)
-```
+## Q2. How The Price/Night Change Over The Year in Seattle ?
 
-<img src="./image/4.png">
+* Make a bar chart to analyze the changes in price within a year
 
-#### 2.Missing Value Fixed Value Padding
+<img src='./image/5.png'>
 
-* Using the fillna function to fill in missing values
-
-```python
-# Missing values are padded as fixed values
-df.host_response_time.fillna('nodata', inplace=True)
-df.host_response_time.value_counts()
-```
+* By analyzing the bar chart, it can be seen that rent is highest during summer and continues to decline after that until the end of winter
 
 
 
-#### 3.Filling In The Average Missing Value
+## Q3. Can We Predict Property Price/Night in Seattle Using Machine Learning Model?
 
-* Fill in the average using SimpleImputer
+* Solving the problem of housing price prediction by building a random forest model, using grid search method to search for hyperparameters, and k-fold cross validation to ensure the robustness of the model
+* Below is a scatter plot of the model's predictions and the actual data
 
-```python
-# Missing values are replaced by means
-df_room = ['beds', 'bedrooms', 'bathrooms']
-df[df_room] = SimpleImputer().fit_transform(df[df_room])
-```
+<img src='./image/6.png'>
 
+* It is possible to predict housing prices, but the results are not very good. It may be due to the selection and optimization of models, and the data is relatively limited
 
+## Summarize
 
-#### 4.Missing Value Mode Padding
+* This article addresses three issues in total
 
-* Using the for loop and mode function to fill in the mode
-
-```python
-# Missing values are replaced by the mode
-df_review = ['review_scores_rating', 'review_scores_accuracy', 'review_scores_cleanliness', 'review_scores_checkin','review_scores_communication','review_scores_location','review_scores_value']
-for i in df_review:
-    df[i]=df[i].fillna(df[i].mode()[0])
-```
-
-#### 5.Delete Rows With Missing Values
-
-* Use dropna to delete rows with missing values
-
-```python
-# Missing Values: Deletes the row where the missing value is located 
-df_host=['host_since', 'host_identity_verified', 'property_type', 'host_is_superhost']
-df.dropna(subset = df_host, inplace=True)
-```
-
-## 3.Summarize
-
-* Data processing is of utmost importance for the entire analysis process. Only when data processing is done well can data analysis proceed smoothly
-* There are many methods for handling missing values, but this article only provides a few examples. Other methods can be commented on in the comments section, let's learn together
+* Firstly, from the first question, we can see that there are three main factors for becoming a super landlord:
+  1. More is better evaluation
+  2. The type of room
+  3. Fast response time
+* Secondly, the second question shows that during the summer, the rent is relatively high
+* Finally, the third question is that although we can predict housing prices, the effect is not very good
+* You can find that big data is closely related to things in life. Let's learn about big data related knowledge
