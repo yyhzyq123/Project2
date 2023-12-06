@@ -6,6 +6,7 @@
 1. [Installation](#installation)
 2. [Data](#data)
 3. [Business Questions](#business_questions)
+4. [Project Results](#Project Results)
 
 
 
@@ -32,5 +33,9 @@ For this project, I was interested in using Fantasy Basketball data to better un
 
 The final outcome of this project has two parts
 
-* jupyter notebook  On Write  a Data Science Blog Post.ipynb
-* jupyter notebook On bolg.md
+* jupyter notebook  On [project1.ipynb](https://github.com/yyhzyq123/Project2/project.ipynb)
+
+* Blog publication On [bolg.md](https://github.com/yyhzyq123/Project2/bolg.md)
+
+  
+
